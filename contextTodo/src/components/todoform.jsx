@@ -1,4 +1,8 @@
+import { useState } from "react";
+import UseTodo from "../context/todoContext";
+
 export function TodoForm() {
+  const [todo, setTodo] = useState("");
   return (
     <form className="flex">
       <input
