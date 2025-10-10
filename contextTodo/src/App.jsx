@@ -32,6 +32,10 @@ function App() {
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem("todos"));
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
   return (
     <>
       <TodoContextProvider
