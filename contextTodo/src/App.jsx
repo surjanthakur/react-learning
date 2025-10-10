@@ -14,7 +14,7 @@ function App() {
   const updateTodo = (id, todo) => {
     setTodos((prev) =>
       prev.map((prevtodo) =>
-        prevtodo.id == id ? { todo: todo.todo } : prevtodo
+        prevtodo.id === id ? { todo: todo.todo } : prevtodo
       )
     );
   };
@@ -25,7 +25,13 @@ function App() {
   };
 
   // check if todo complete or not
-  const toggleComplete = () => {};
+  const toggleComplete = (id) => {
+    setTodos((prev) =>
+      prev.map((todo) =>
+        todo.id === id ? { completed: !todo.completed } : todo
+      )
+    );
+  };
 
   return (
     <>
