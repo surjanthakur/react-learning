@@ -10,7 +10,7 @@ function App() {
 
   // add todo func
   const addTodo = (todo) => {
-    setTodos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
+    setTodos((prev) => [{ ...todo }, ...prev]);
   };
 
   // update todo func
