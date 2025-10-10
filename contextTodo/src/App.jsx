@@ -3,19 +3,20 @@ import "./App.css";
 import { TodoContextProvider } from "./context/todoContext";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem("todos");
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
 
   // add todo func
   const addTodo = (todo) => {
-    setTodos((prev) => ({ id: Date.now(), ...todo, ...prev }));
+    setTodos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
   };
 
   // update todo func
   const updateTodo = (id, todo) => {
     setTodos((prev) =>
-      prev.map((prevtodo) =>
-        prevtodo.id === id ? { todo: todo.todo } : prevtodo
-      )
+      prev.map((prevtodo) => (prevtodo.id === id ? todo : prevtodo))
     );
   };
 
@@ -28,10 +29,15 @@ function App() {
   const toggleComplete = (id) => {
     setTodos((prev) =>
       prev.map((todo) =>
-        todo.id === id ? { completed: !todo.completed } : todo
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
   };
+
+  // ✅ Save todos whenever they change
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <>
