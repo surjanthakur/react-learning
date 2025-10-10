@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TodoContextProvider } from "./context/todoContext";
 
 function App() {
@@ -28,6 +28,10 @@ function App() {
       )
     );
   };
+
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem("todos"));
+  }, []);
   return (
     <>
       <TodoContextProvider
