@@ -1,7 +1,12 @@
 import "./App.css";
+import ThemeUi from "./components/themeUi";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <ThemeUi />
+    </>
+  );
 }
 
 export default App;
