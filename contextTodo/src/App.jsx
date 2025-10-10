@@ -5,7 +5,14 @@ import TodoItem from "./components/todoUi";
 import TodoForm from "./components/todoform";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem("todos");
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = (todo) => {
     setTodos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
@@ -23,21 +30,12 @@ function App() {
 
   const toggleComplete = (id) => {
     setTodos((prev) =>
-      prev.map((prevTodo) =>
-        prevTodo === id
-          ? { ...prevTodo, completed: !prevTodo.completed }
-          : prevTodo
+      prev.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
   };
 
-  useEffect(() => {
-    JSON.parse(localStorage.getItem("todos"));
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
   return (
     <>
       <TodoContextProvider
