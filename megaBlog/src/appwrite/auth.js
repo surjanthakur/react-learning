@@ -10,8 +10,43 @@ export class AuthService {
       .setProject(config.appWriteProjectid);
     this.account = new Account(this.client);
   }
-  async createAccount({ email, password, names }) {
+  async createAccount({ email, password, name }) {
     try {
+      const userAccount = await this.account.create(
+        ID.unique(),
+        email,
+        password,
+        name
+      );
+      if (userAccount) {
+        return this.login({ email, password });
+      } else {
+        return userAccount;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async login({ email, password }) {
+    try {
+      return await this.account.createEmailPasswordSession(email, password);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getCurrUser() {
+    try {
+      return await this.account.get();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async logout() {
+    try {
+      await this.account.deleteSessions();
     } catch (error) {
       throw error;
     }
