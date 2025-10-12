@@ -13,9 +13,9 @@ export class Services {
     this.bucket = new Storage(this.client);
   }
 
-  async createPost({ title, content, image, status, userId }) {
+  async createPost({ slug, title, content, image, status, userId }) {
     try {
-      return await this.databases.createPost(ID.unique(), {
+      return await this.databases.createPost(slug, {
         title,
         content,
         image,
@@ -35,6 +35,15 @@ export class Services {
         image,
         status,
       });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deletePost(slug) {
+    try {
+      await this.databases.deletePost(slug);
+      return true;
     } catch (error) {
       throw error;
     }
