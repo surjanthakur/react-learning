@@ -48,6 +48,16 @@ export class Services {
       throw error;
     }
   }
+
+  async getPost(slug) {
+    try {
+      return await this.databases.getPost(slug);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getAllPosts() {}
 }
 
 const services = new Services();
