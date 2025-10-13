@@ -57,7 +57,12 @@ export class Services {
     }
   }
 
-  async getAllPosts() {}
+  async getAllPosts() {
+    try {
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 const services = new Services();
