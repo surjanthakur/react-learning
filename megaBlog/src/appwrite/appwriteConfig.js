@@ -57,13 +57,40 @@ export class Services {
     }
   }
 
-  async getAllPosts() {
+  async getAllPosts(queries = [Query.equal("status", "active")]) {
     try {
+      return await this.databases.listDocuments(
+        config.appWriteDatabaseid,
+        config.appWriteCollectionid,
+        queries
+      );
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // file upload services
+  async uploadFile(file) {
+    try {
+      return await this.bucket.createFile(
+        config.appWriteBucketid,
+        ID.unique(),
+        file
+      );
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // delete file services
+  async deleteFile(fileId) {
+    try {
+      await this.bucket.deleteFile(config.appWriteBucketid, fileId);
+      return true;
     } catch (error) {
       throw error;
     }
   }
 }
-
 const services = new Services();
 export default services;
