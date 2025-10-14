@@ -91,6 +91,15 @@ export class Services {
       throw error;
     }
   }
+
+  // get file preview
+  async getFilePreview(fileId) {
+    try {
+      return this.bucket.getFilePreview(config.appWriteBucketid, fileId);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 const services = new Services();
 export default services;
