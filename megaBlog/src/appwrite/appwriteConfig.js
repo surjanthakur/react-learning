@@ -1,6 +1,7 @@
 import config from "../config/config";
 import { Client, Account, ID, Storage, Query, Databases } from "appwrite";
 
+// appwrite services class
 export class Services {
   client = new Client();
   databases;
@@ -13,6 +14,7 @@ export class Services {
     this.bucket = new Storage(this.client);
   }
 
+  // create post services
   async createPost({ slug, title, content, image, status, userId }) {
     try {
       return await this.databases.createPost(slug, {
@@ -27,6 +29,7 @@ export class Services {
     }
   }
 
+  // update post services
   async updatePost(slug, { title, content, image, status }) {
     try {
       return await this.databases.updatePost(slug, {
@@ -40,6 +43,7 @@ export class Services {
     }
   }
 
+  // delete post services
   async deletePost(slug) {
     try {
       await this.databases.deletePost(slug);
@@ -49,6 +53,7 @@ export class Services {
     }
   }
 
+  // get single post services
   async getPost(slug) {
     try {
       return await this.databases.getPost(slug);
@@ -57,6 +62,7 @@ export class Services {
     }
   }
 
+  // get all posts services
   async getAllPosts(queries = [Query.equal("status", "active")]) {
     try {
       return await this.databases.listDocuments(
