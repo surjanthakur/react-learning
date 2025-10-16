@@ -8,24 +8,29 @@ function AddTodo() {
 
   const addTodoHandler = (e) => {
     e.preventDefault();
+    if (!input.trim()) return;
     dispatch(addTodo(input));
     setInput("");
   };
 
   return (
-    <form onSubmit={addTodoHandler} className="space-x-3 mt-12">
+    <form
+      onSubmit={addTodoHandler}
+      className="w-full max-w-md flex items-center justify-center gap-3 mt-10 bg-zinc-900/50 p-4 rounded-2xl border border-zinc-700 shadow-md"
+    >
       <input
         type="text"
-        className="bg-gray-800 rounded border border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-        placeholder="Enter a Todo..."
+        className="flex-1 bg-transparent text-white placeholder-gray-400 border border-zinc-700 rounded-xl py-2 px-4 text-base outline-none focus:border-[#ACFE65] focus:ring-2 focus:ring-[#ACFE65]/40 transition-all duration-200"
+        placeholder="✍️ Write a new todo..."
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
+
       <button
         type="submit"
-        className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+        className="bg-[#ACFE65] text-[#141C18] font-semibold px-5 py-2 rounded-xl hover:bg-[#bfff6d] transition-all duration-200 active:scale-95 shadow hover:shadow-lg"
       >
-        Add Todo
+        Add
       </button>
     </form>
   );
