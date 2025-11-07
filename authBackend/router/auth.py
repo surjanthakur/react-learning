@@ -5,8 +5,8 @@ from database import get_session_db
 from pwdlib import PasswordHash
 from pydantic_schema import showSignup, showLogin, Token
 from uuid import uuid4
-from authFunction import create_access_token
-from datetime import datetime, timedelta, timezone
+from .authFunction import create_access_token
+from datetime import timedelta
 
 router = APIRouter(tags=["authentication"])
 
