@@ -3,12 +3,16 @@ from sqlmodel import Session
 from dbModels import User
 from database import get_session_db
 from pwdlib import PasswordHash
-from pydantic_schema import showSignup, showLogin
+from pydantic_schema import showSignup, showLogin, Token
 from uuid import uuid4
+from authFunction import create_access_token
+from datetime import datetime, timedelta, timezone
 
 router = APIRouter(tags=["authentication"])
 
 password_hash = PasswordHash.recommended()
+
+ACCESS_TOKEN_EXPIRE_MINUTES = 15
 
 
 # hash plain password
@@ -54,6 +58,11 @@ def login_user(loginform: showLogin, session_db: Session = Depends(get_session_d
     if not verify_password(loginform.password, user.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password ❌",
+            detail="Incorrect password please try again ❌",
             headers={"WWW-Authenticate": "Bearer"},
         )
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(
+        data={"sub": user.email}, expires_delta=access_token_expires
+    )
+    return Token(access_token=access_token, token_type="bearer")
