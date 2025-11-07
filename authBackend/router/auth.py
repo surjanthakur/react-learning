@@ -8,11 +8,13 @@ router = APIRouter(tags=["authentication"])
 password_hash = PasswordHash.recommended()
 
 
+# signup user
 @router.post("/signup")
 def signup_user():
     pass
 
 
+# login user
 @router.post("/login")
 def login_user():
     pass
