@@ -1,8 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, status, HTTPException
 from dbModels import User
 from database import get_session_db
+from pwdlib import PasswordHash
 
 router = APIRouter(tags=["authentication"])
+
+password_hash = PasswordHash.recommended()
 
 
 @router.post("/signup")
