@@ -6,3 +6,9 @@ class User(SQLModel, table=True):
     username: str
     email: str
     password: str
+
+
+class Tweet(SQLModel, table=True):
+    id: str = Field(primary_key=True, default=None)
+    owner: str
+    tweet: str = Field(min_length=5, max_digits=200)
