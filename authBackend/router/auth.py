@@ -34,7 +34,7 @@ def signup_user(signupform: showSignup, session_db: Session = Depends(get_sessio
             detail="user is already exist please try again ❌",
         )
     new_user = User(
-        id=str(uuid4),
+        id=str(uuid4()),
         username=signupform.username,
         email=signupform.email,
         password=hashPassword(signupform.password),
