@@ -42,7 +42,7 @@ def signup_user(signupform: showSignup, session_db: Session = Depends(get_sessio
     session_db.add(new_user)
     session_db.commit()
     session_db.refresh(new_user)
-    return {"message": "signup user successfully"}
+    return {"message": "signup user successfully ✅"}
 
 
 # login user
