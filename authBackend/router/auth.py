@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, status, HTTPException
 from sqlmodel import Session
 from dbModels import User
 from database import get_session_db
-from pwdlib import PasswordHash
+from passlib.context import CryptContext  # type: ignore
 from pydantic_schema import showSignup, showLogin, Token
 from uuid import uuid4
 from .authFunction import create_access_token
@@ -10,18 +10,18 @@ from datetime import timedelta
 
 router = APIRouter(tags=["authentication"])
 
-password_hash = PasswordHash.recommended()
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 ACCESS_TOKEN_EXPIRE_MINUTES = 15
 
 
 # hash plain password
 def hashPassword(password):
-    return password_hash.hash(password)
+    return pwd_context.hash(password)
 
 
 def verify_password(plain_password, hashed_password):
-    return password_hash.verify(plain_password, hashed_password)
+    return pwd_context.verify(plain_password, hashed_password)
 
 
 # signup user
