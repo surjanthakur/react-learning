@@ -8,10 +8,7 @@ from uuid import uuid4
 from .authFunction import create_access_token
 from datetime import timedelta
 
-router = APIRouter(
-    tags=["authentication"],
-    prefix="/auth",
-)
+router = APIRouter(tags=["authentication"])
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
