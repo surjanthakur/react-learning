@@ -21,7 +21,7 @@ export default function Signup() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/signup",
+        "http://127.0.0.1:8000/auth/signup",
         signupForm
       );
 
