@@ -1,7 +1,11 @@
 import "./signup.css";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [signupForm, setSignupForm] = useState({
     username: "",
     email: "",
@@ -9,12 +13,29 @@ export default function Signup() {
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target.value;
+    const { name, value } = e.target;
     setSignupForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/signup",
+        signupForm
+      );
+
+      // ✅ check properly for success status
+      if (response.status === 200 || response.status === 201) {
+        toast.success("User signed up successfully ✅");
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Signup failed ❌");
+    }
   };
   return (
     <>
@@ -23,7 +44,7 @@ export default function Signup() {
           <p className="title">SIGN UP</p>
           <form onSubmit={handleSubmit}>
             <div className="form_group">
-              <label className="sub_title" for="name">
+              <label className="sub_title" htmlFor="name">
                 username
               </label>
               <input
@@ -36,7 +57,7 @@ export default function Signup() {
               />
             </div>
             <div className="form_group">
-              <label className="sub_title" for="email">
+              <label className="sub_title" htmlFor="email">
                 Email
               </label>
               <input
@@ -50,7 +71,7 @@ export default function Signup() {
               />
             </div>
             <div className="form_group">
-              <label className="sub_title" for="password">
+              <label className="sub_title" htmlFor="password">
                 Password
               </label>
               <input
@@ -78,6 +99,7 @@ export default function Signup() {
         </div>
         <a className="link" href=""></a>
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 }
