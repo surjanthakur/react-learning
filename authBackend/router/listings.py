@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session
 from database import get_session_db
 from dbModels import Tweet
-from authFunction import get_current_user
+from router.authFunction import get_current_user
 
 router = APIRouter(tags=["tweets"])
 
