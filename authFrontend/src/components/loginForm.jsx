@@ -1,19 +1,38 @@
 import "./signup.css";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target.value;
+    const { name, value } = e.target;
     setLoginForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/auth/login",
+        loginForm
+      );
+      if (response.status == 200 || response.status == 201) {
+        toast.success(`${loginForm.email} login successfully ✅`);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      }
+    } catch (err) {
+      toast.err("something went wrong ❌");
+      console.log(err);
+    }
   };
   return (
     <>
@@ -53,9 +72,9 @@ export default function Login() {
               <button className="btn">LOGIN UP</button>
               <p>
                 not Have an Account?{" "}
-                <a className="link" href="">
+                <Link className="link" to="/signup">
                   signup Here!
-                </a>
+                </Link>
               </p>
               <a className="link" href=""></a>
             </div>
@@ -64,6 +83,7 @@ export default function Login() {
         </div>
         <a className="link" href=""></a>
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </>
   );
 }
