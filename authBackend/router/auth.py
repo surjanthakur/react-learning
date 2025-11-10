@@ -6,6 +6,7 @@ from passlib.context import CryptContext  # type: ignore
 from pydantic_schema import showSignup, showLogin, Token
 from uuid import uuid4
 from .authFunction import create_access_token
+from fastapi.responses import JSONResponse
 from datetime import timedelta
 
 router = APIRouter(tags=["authentication"])
@@ -62,6 +63,14 @@ def login_user(loginform: showLogin, session_db: Session = Depends(get_session_d
         access_token = create_access_token(
             data={"sub": user.email}, expires_delta=access_token_expires
         )
-        return Token(access_token=access_token, token_type="bearer")
-    except Exception as e:
+        response = JSONResponse({"message": "user login successfully ✅"})
+        response.set_cookie(
+            key="access_token",
+            value=access_token,
+            httponly=True,  # JS se access nahi kar sakte
+            secure=True,  # HTTPS only
+            samesite="lax",
+        )
+        return response
+    except Exception:
         raise HTTPException(status_code=500, detail="Server error during login 🚨")
