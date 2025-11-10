@@ -1,14 +1,15 @@
 import "./signup.css";
+import { useState } from "react";
 
 export default function Login() {
-  const [signupForm, setSignupForm] = useState({
+  const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target.value;
-    setSignupForm((prev) => ({ ...prev, [name]: value }));
+    setLoginForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
@@ -31,7 +32,7 @@ export default function Login() {
                 type="email"
                 name="email"
                 onChange={handleChange}
-                value={signupForm.email}
+                value={loginForm.email}
               />
             </div>
             <div className="form_group">
@@ -45,7 +46,7 @@ export default function Login() {
                 name="password"
                 type="password"
                 onChange={handleChange}
-                value={signupForm.password}
+                value={loginForm.password}
               />
             </div>
             <div>
