@@ -20,12 +20,13 @@ def hashPassword(password):
     return pwd_context.hash(password)
 
 
+# verify plain and hash password
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
 
 # signup user
-@router.post("/signup")
+@router.post("/auth/signup")
 def signup_user(signupform: showSignup, session_db: Session = Depends(get_session_db)):
     user = session_db.query(User).filter(User.email == signupform.email).first()  # type: ignore
     if user is not None:
@@ -46,7 +47,7 @@ def signup_user(signupform: showSignup, session_db: Session = Depends(get_sessio
 
 
 # login user
-@router.post("/login")
+@router.post("/auth/login")
 def login_user(loginform: showLogin, session_db: Session = Depends(get_session_db)):
     user = session_db.query(User).filter(User.email == loginform.email).first()  # type: ignore
     if not user:
