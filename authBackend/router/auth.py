@@ -50,21 +50,18 @@ def signup_user(signupform: showSignup, session_db: Session = Depends(get_sessio
 # login user
 @router.post("/auth/login")
 def login_user(loginform: showLogin, session_db: Session = Depends(get_session_db)):
-    user = session_db.query(User).filter(User.email == loginform.email).first()  # type: ignore
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password ❌",
-            headers={"WWW-Authenticate": "Bearer"},
+    try:
+        user = session_db.query(User).filter(User.email == loginform.email).first()  # type: ignore
+        if not user or not verify_password(loginform.password, user.password):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid email or password ❌",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        access_token = create_access_token(
+            data={"sub": user.email}, expires_delta=access_token_expires
         )
-    if not verify_password(loginform.password, user.password):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect password please try again ❌",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(
-        data={"sub": user.email}, expires_delta=access_token_expires
-    )
-    return Token(access_token=access_token, token_type="bearer")
+        return Token(access_token=access_token, token_type="bearer")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Server error during login 🚨")

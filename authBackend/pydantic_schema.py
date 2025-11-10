@@ -9,7 +9,7 @@ class showSignup(BaseModel):
 
 
 class showLogin(BaseModel):
-    email: str
+    email: EmailStr
     password: str
 
 
