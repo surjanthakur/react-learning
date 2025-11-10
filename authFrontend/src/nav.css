@@ -1,0 +1,10 @@
+.main {
+  height: 50px;
+  max-width: max-content;
+  padding: 1rem;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+}
