@@ -4,7 +4,6 @@ from typing import Annotated
 from jose import jwt, JWTError, ExpiredSignatureError
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from jwt.exceptions import InvalidTokenError
 from pydantic_schema import TokenData
 
 
@@ -40,5 +39,9 @@ def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
             raise credentials_exception
         token_data = TokenData(username=username)
         return token_data
-    except InvalidTokenError:
-        raise credentials_exception
+    except ExpiredSignatureError:
+        raise HTTPException(
+            status_code=401, detail="Token expired, please login again ❌"
+        )
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Invalid token ❌")
