@@ -1,3 +1,5 @@
+import "./signup.css";
+
 export default function Login() {
   const [signupForm, setSignupForm] = useState({
     email: "",
