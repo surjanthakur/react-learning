@@ -88,9 +88,9 @@ export default function Signup() {
               <button className="btn">SIGN UP</button>
               <p>
                 Have an Account?{" "}
-                <a className="link" href="">
+                <Link className="link" to="/login">
                   Login Here!
-                </a>
+                </Link>
               </p>
               <a className="link" href=""></a>
             </div>
