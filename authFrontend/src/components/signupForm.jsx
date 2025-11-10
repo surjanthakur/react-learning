@@ -8,11 +8,12 @@ export default function Signup() {
     password: "",
   });
 
-  handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target.value;
     setSignupForm((prev) => ({ ...prev, [name]: value }));
   };
-  handleSubmit = (e) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
   };
   return (
@@ -20,7 +21,7 @@ export default function Signup() {
       <div className="container">
         <div className="form_area">
           <p className="title">SIGN UP</p>
-          <form onChange={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <div className="form_group">
               <label className="sub_title" for="name">
                 username
