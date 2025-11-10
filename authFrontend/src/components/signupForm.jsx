@@ -27,7 +27,7 @@ export default function Signup() {
 
       // ✅ check properly for success status
       if (response.status === 200 || response.status === 201) {
-        toast.success("User signed up successfully ✅");
+        toast.success(`${signupForm.username} signed up successfully ✅`);
         setTimeout(() => {
           navigate("/login");
         }, 1500);

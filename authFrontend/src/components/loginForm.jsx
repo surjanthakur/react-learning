@@ -22,7 +22,7 @@ export default function Login() {
           <p className="title">LOGIN</p>
           <form onSubmit={handleSubmit}>
             <div className="form_group">
-              <label className="sub_title" for="email">
+              <label className="sub_title" htmlFor="email">
                 Email
               </label>
               <input
@@ -36,7 +36,7 @@ export default function Login() {
               />
             </div>
             <div className="form_group">
-              <label className="sub_title" for="password">
+              <label className="sub_title" htmlFor="password">
                 Password
               </label>
               <input
