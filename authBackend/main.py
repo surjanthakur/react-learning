@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from database import create_db
 from router import listings, auth
+from fastapi.middleware.cors import CORSMiddleware
 
 
 # connnect to databse when app started
@@ -11,7 +12,17 @@ async def create_session_db(app: FastAPI):
     yield None
 
 
+origins = ["http://localhost:5173"]
+
 app = FastAPI(lifespan=create_session_db)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.include_router(router=listings.router)
 app.include_router(router=auth.router)
