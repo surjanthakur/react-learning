@@ -1,4 +1,3 @@
-from string import whitespace
 from pydantic import BaseModel, EmailStr, Field
 
 
