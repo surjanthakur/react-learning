@@ -30,20 +30,21 @@ def verify_password(plain_password, hashed_password):
 def signup_user(signupform: showSignup, session_db: Session = Depends(get_session_db)):
     user = session_db.query(User).filter(User.email == signupform.email).first()  # type: ignore
     if user is not None:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="user is already exist please try again ❌",
-        )
+        raise HTTPException(status_code=400, detail="Invalid signup request ❌")
     new_user = User(
         id=str(uuid4()),
         username=signupform.username,
         email=signupform.email,
         password=hashPassword(signupform.password),
     )
-    session_db.add(new_user)
-    session_db.commit()
-    session_db.refresh(new_user)
-    return {"message": "signup user successfully ✅"}
+    try:
+        session_db.add(new_user)
+        session_db.commit()
+        session_db.refresh(new_user)
+        return new_user.username
+    except Exception as e:
+        session_db.rollback()
+        raise HTTPException(status_code=500, detail="Something went wrong 🚨")
 
 
 # login user

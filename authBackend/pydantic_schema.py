@@ -1,10 +1,10 @@
-from re import S
-from pydantic import BaseModel
+from string import whitespace
+from pydantic import BaseModel, EmailStr, Field
 
 
 class showSignup(BaseModel):
-    username: str
-    email: str
+    username: str = Field(min_length=3, max_length=30)
+    email: EmailStr
     password: str
 
 
