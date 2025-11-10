@@ -1,7 +1,12 @@
 import "./App.css";
+import Signup from "./components/signupForm";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <Signup />
+    </>
+  );
 }
 
 export default App;
