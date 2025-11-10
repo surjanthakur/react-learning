@@ -3,7 +3,7 @@ from sqlmodel import Session
 from dbModels import User
 from database import get_session_db
 from passlib.context import CryptContext  # type: ignore
-from pydantic_schema import showSignup, showLogin, Token
+from pydantic_schema import showSignup, showLogin
 from uuid import uuid4
 from .authFunction import create_access_token
 from fastapi.responses import JSONResponse
@@ -43,7 +43,7 @@ def signup_user(signupform: showSignup, session_db: Session = Depends(get_sessio
         session_db.commit()
         session_db.refresh(new_user)
         return new_user.username
-    except Exception as e:
+    except Exception:
         session_db.rollback()
         raise HTTPException(status_code=500, detail="Something went wrong 🚨")
 

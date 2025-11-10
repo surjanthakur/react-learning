@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
-
+from dbModels import User
+from sqlmodel import Session
+from database import get_session_db
 from jose import jwt, JWTError, ExpiredSignatureError
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
@@ -26,7 +28,11 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     return encoded_jwt
 
 
-def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
+# authorization user with access token
+def get_current_user(
+    token: Annotated[str, Depends(oauth2_scheme)],
+    session_db: Session = Depends(get_session_db),
+):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -34,11 +40,14 @@ def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
     )
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username = payload.get("sub")
-        if username is None:
+        email = payload.get("sub")
+        if email is None:
             raise credentials_exception
-        token_data = TokenData(username=username)
-        return token_data
+        token_data = TokenData(email=email)
+        user = session_db.query(User).filter(User.email == token_data.email).first()  # type: ignore
+        if not user:
+            raise HTTPException(status_code=401, detail="User not found ❌")
+        return user
     except ExpiredSignatureError:
         raise HTTPException(
             status_code=401, detail="Token expired, please login again ❌"
