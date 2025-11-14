@@ -1,7 +1,16 @@
 import "./App.css";
+import Todos from "./components/todos";
+import AddTodo from "./components/todoForm";
+import {Store} from "./app/store";
+import {Provider} from "react-redux"
 
 function App() {
-  return <></>;
+  return <>
+<Provider store={Store}>
+  <AddTodo/>
+  <Todos/>
+</Provider>
+  </>;
 }
 
 export default App;
