@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { addTodo } from "../features/todo";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "redux";
 
 function AddTodo() {
   // Local state for storing the current input value
