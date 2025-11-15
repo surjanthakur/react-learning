@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
@@ -25,8 +25,6 @@ function App() {
     passgenerator();
   }, [charLength, number, specialChar]);
 
-  const copyPasswordRef = useRef(null);
-
   const copyPassword = useCallback(() => {
     window.navigator.clipboard.writeText(password);
     setIsCopy(true);
@@ -38,13 +36,7 @@ function App() {
       <div className="main">
         <div className="pass-generator-area">
           <label>password generator</label>
-          <input
-            className="pass-form"
-            type="text"
-            value={password}
-            readOnly
-            ref={copyPasswordRef}
-          />
+          <input className="pass-form" type="text" value={password} readOnly />
           <button className="btn" onClick={copyPassword}>
             {isCopy ? 'copied !' : 'copy'}
           </button>
