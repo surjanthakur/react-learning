@@ -14,7 +14,7 @@ function App() {
       task: todo,
       completed: false,
     };
-    setTodos(newTodo);
+    setTodos((prev) => [...prev, newTodo]);
   };
 
   const updateTodo = (todo, id) => {
@@ -48,9 +48,8 @@ function App() {
             <TodoForm />
           </div>
           <div className="flex flex-wrap gap-y-3">
-            {todos.map((todo) => (
-              <TodoItem key={todo.id} todo={todo} />
-            ))}
+            {Array.isArray(todos) &&
+              todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
           </div>
         </div>
       </div>
