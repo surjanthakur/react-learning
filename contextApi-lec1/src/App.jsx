@@ -14,19 +14,21 @@ function App() {
       task: todo,
       completed: false,
     };
-    setTodos((prev) => [...prev, newTodo]);
+    setTodos((prev) => [newTodo, ...prev]);
   };
 
   const updateTodo = (todo, id) => {
-    const updateList = todos.map((t) =>
-      t.id === id ? { ...t, task: todo } : t
+    const updateList = todos.map((prevTodo) =>
+      prevTodo.id === id ? { ...prevTodo, task: todo } : prevTodo
     );
     setTodos(updateList);
   };
 
   const toggleComplete = (id) => {
-    const updateList = todos.map((t) =>
-      t.id === id ? { ...t, completed: !t.completed } : t
+    const updateList = todos.map((prevTodo) =>
+      prevTodo.id === id
+        ? { ...prevTodo, completed: !prevTodo.completed }
+        : prevTodo
     );
     setTodos(updateList);
   };
