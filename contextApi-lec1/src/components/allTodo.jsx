@@ -43,7 +43,10 @@ function TodoItem({ todo }) {
 
           if (isTodoEditable) {
             editTodo();
-          } else setIsTodoEditable((prev) => !prev);
+            setIsTodoEditable(false);
+          } else {
+            setIsTodoEditable((prev) => !prev);
+          }
         }}
         disabled={todo.completed}
       >
