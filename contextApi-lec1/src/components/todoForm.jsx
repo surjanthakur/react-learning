@@ -15,7 +15,7 @@ export default function TodoForm() {
     <form className="flex" onSubmit={handleSubmit}>
       <input
         type="text"
-        value={task}
+        value={todo}
         onChange={(e) => {
           setTodo(e.target.value);
         }}
