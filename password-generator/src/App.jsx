@@ -2,34 +2,35 @@ import { useCallback, useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
-  const [charLength, setCharLength] = useState(5);
+  const [length, setLength] = useState(5);
   const [number, setNumber] = useState(false);
-  const [specialChar, setSpecialChar] = useState(false);
-  const [isCopy, setIsCopy] = useState(false);
+  const [character, setCharacter] = useState(false);
+  const [isCopy, setIscopy] = useState(false);
   const [password, setPassword] = useState('');
 
-  const passgenerator = useCallback(() => {
+  const passwordGenerator = useCallback(() => {
     let pass = '';
-    let string = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    if (number) string += '1234567890';
-    if (specialChar) string += '!@#$%^&*()_+=<>?/|';
-
-    for (let i = 1; i <= charLength; i++) {
-      let genPass = Math.floor(Math.random() * string.length + 1);
-      pass += string.charAt(genPass);
+    let str = 'abcdefghijklmnopqrstuvwxyzDOVMFQPOUTMAW';
+    if (number) str += '1234567890';
+    if (character) str += '¡™£₹§ˆ¶•̐°°)(*&^%$#@!~₹';
+    for (let i = 1; i <= length; i++) {
+      let gennumber = Math.floor(Math.random() * str.length);
+      pass += str.charAt(gennumber);
     }
     setPassword(pass);
-  }, [charLength, number, specialChar, setPassword]);
+  }, [length, number, character]);
 
   useEffect(() => {
-    passgenerator();
-  }, [charLength, number, specialChar]);
+    passwordGenerator();
+  }, [length, number, character, setPassword]);
 
-  const copyPassword = useCallback(() => {
-    window.navigator.clipboard.writeText(password);
-    setIsCopy(true);
-    setTimeout(() => setIsCopy(false), 3000);
-  }, [password]);
+  const copypassword = () => {
+    setIscopy(true);
+    navigator.clipboard.writeText(password);
+    setTimeout(() => {
+      setIscopy(false);
+    }, 3000);
+  };
 
   return (
     <>
@@ -37,41 +38,33 @@ function App() {
         <div className="pass-generator-area">
           <label>password generator</label>
           <input className="pass-form" type="text" value={password} readOnly />
-          <button className="btn" onClick={copyPassword}>
-            {isCopy ? 'copied !' : 'copy'}
+          <button className="btn" onClick={copypassword}>
+            {isCopy ? 'copied' : 'copy'}
           </button>
         </div>
         <div className="apply-features">
-          <label>length</label>
+          <label>password length {length}</label>
           <input
             className="charlength"
             type="range"
-            max={25}
+            value={length}
             min={5}
-            value={charLength}
-            onChange={(e) => {
-              setCharLength(e.target.value);
-            }}
+            max={10}
+            onChange={(e) => setLength(e.target.value)}
           />
 
-          <label>numbers</label>
+          <label>add numbers</label>
           <input
             className="numbers"
             type="checkbox"
-            defaultChecked={number}
-            onChange={() => {
-              setNumber((prev) => !prev);
-            }}
+            onChange={() => setNumber((prev) => !prev)}
           />
 
-          <label>special-char</label>
+          <label>add special-char</label>
           <input
             className="character"
             type="checkbox"
-            defaultChecked={specialChar}
-            onChange={() => {
-              setSpecialChar((prev) => !prev);
-            }}
+            onChange={() => setCharacter((prev) => !prev)}
           />
         </div>
       </div>
