@@ -1,7 +1,9 @@
+import { Link, NavLink } from 'react-router-dom';
+
 export default function Footer() {
   return (
     <footer className="bg-white border-y">
-      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+      <div className="mx-auto w-full max-w-7xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <Link to="/" className="flex items-center">
@@ -19,12 +21,26 @@ export default function Footer() {
               </h2>
               <ul className="text-gray-500 font-medium">
                 <li className="mb-4">
-                  <Link to="/" className="hover:underline">
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? 'text-orange-700' : 'text-gray-700'
+                      } hover:underline`
+                    }
+                  >
                     Home
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link to="/about" className="hover:underline">
+                  <Link
+                    to="/about"
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? 'text-orange-700' : 'text-gray-700'
+                      } hover:underline`
+                    }
+                  >
                     About
                   </Link>
                 </li>
