@@ -1,16 +1,13 @@
-import './App.css';
+import { Outlet } from 'react-router-dom';
 import Footer from './components/footer';
 import Header from './components/header';
-import Home from './components/home';
 
-function App() {
+export default function Layout() {
   return (
     <>
       <Header />
-      <Home />
+      <Outlet />
       <Footer />
     </>
   );
 }
-
-export default App;
