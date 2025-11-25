@@ -33,7 +33,7 @@ export default function Footer() {
                   </NavLink>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     to="/about"
                     className={({ isActive }) =>
                       `${
@@ -42,7 +42,7 @@ export default function Footer() {
                     }
                   >
                     About
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </div>

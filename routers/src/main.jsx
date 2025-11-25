@@ -6,7 +6,7 @@ import About from './components/about';
 import Home from './components/home';
 import Layout from './layout';
 
-Router = createBrowserRouter([
+const Router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
