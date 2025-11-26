@@ -9,6 +9,7 @@ import {
 import './app.css';
 import About from './components/about';
 import Contact from './components/contact';
+import Github, { githubInfoLoader } from './components/github';
 import Home from './components/home';
 import Layout from './layout';
 
@@ -28,8 +29,9 @@ const Router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route path="" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
+      <Route path="about" element={<About />} />
+      <Route path="contact" element={<Contact />} />
+      <Route loader={githubInfoLoader} path="/github" element={<Github />} />
     </Route>
   )
 );
