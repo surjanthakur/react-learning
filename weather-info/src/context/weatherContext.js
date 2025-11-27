@@ -1,8 +1,10 @@
 import { createContext, useContext } from 'react';
 
 const WeatherContext = createContext({
-  City: () => {},
-  weatherData: () => {},
+  city: '',
+  weatherData: null,
+  setCity: (city) => {},
+  setWeatherData: (data) => {},
 });
 
 export const WeatherContextProvider = WeatherContext.Provider;

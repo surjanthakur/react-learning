@@ -3,23 +3,20 @@ import { useState } from 'react';
 import { useWeather } from '../context/weatherContext';
 
 export default function WeatherForm() {
-  const [city, setCity] = useState('');
-  const { City, weatherData } = useWeather();
+  const [cityName, setCityName] = useState('');
+  const { setCity, setWeatherData } = useWeather();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      axios
-        .get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=04686a7ac53877a0115b545489c9fac1`
-        )
-        .then((response) => response.json())
-        .then((data) => {
-          weatherData(data);
-          console.log(data);
-          City(city);
-        });
-      setCity('');
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=04686a7ac53877a0115b545489c9fac1`
+      );
+      const data = response.data;
+      setWeatherData(data);
+      console.log(data);
+      setCity(cityName);
+      setCityName('');
     } catch (error) {
       console.error(' 💁🏻 Error while fetching weather data:', error);
     }
@@ -31,8 +28,8 @@ export default function WeatherForm() {
       onSubmit={handleSubmit}
     >
       <input
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
+        value={cityName}
+        onChange={(e) => setCityName(e.target.value)}
         type="text"
         placeholder="Enter city"
         className="flex-1 px-3 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
