@@ -1,11 +1,15 @@
+import { motion, useScroll } from 'motion/react';
 import './App.css';
 
 function App() {
+  const { scrollYProgress } = useScroll();
   return (
     <>
       <div className="p-20  font-mono ">
-        <div className="w-full h-5 bg-amber-600  top-0 left-0 bottom-5 fixed"></div>
-
+        <motion.div
+          style={{ scaleX: scrollYProgress }}
+          className="w-full h-5 bg-amber-600 origin-bottom-left border-t-2 border-b-2 border-white top-0 left-0 bottom-5 fixed"
+        ></motion.div>
         <h1 className="text-4xl font-bold text-center mb-10">
           this is heading that i provided
         </h1>
