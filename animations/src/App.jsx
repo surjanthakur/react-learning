@@ -6,8 +6,9 @@ function App() {
     <>
       <div>
         <motion.div
-          animate={{ x: 1000, rotate: 360 }}
-          transition={{ duration: 3, delay: 2, repeat: 2 }}
+          drag
+          dragConstraints={{ left: 0, right: 800, top: 0, bottom: 800 }}
+          whileHover={{ scale: 1.3, backgroundColor: 'red' }}
           className="box"
           style={{
             display: 'flex',
@@ -18,12 +19,6 @@ function App() {
           box 1
         </motion.div>
       </div>
-      <motion.h1
-        animate={{ x: 1000, y: 500 }}
-        transition={{ duration: 2, delay: 1, repeat: 2 }}
-      >
-        subscribe
-      </motion.h1>
     </>
   );
 }
