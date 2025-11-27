@@ -9,11 +9,11 @@ export default function Home() {
           <div className="max-w-xl sm:mt-1 mt-80 space-y-8 text-center sm:text-right sm:ml-auto">
             <motion.h2
               className="text-4xl font-bold sm:text-5xl leading-tight"
-              animate={{ x: -200, y: 20 }}
-              transition={{ duration: 2, delay: 0.5, ease: 'anticipate' }}
+              drag
+              whileDrag={{ scaleY: 1.2 }}
+              dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
             >
               Download Now
-              <span className="hidden sm:block text-4xl">Lorem Ipsum</span>
             </motion.h2>
 
             <p className="text-gray-700 text-lg sm:text-xl leading-relaxed">
@@ -62,7 +62,7 @@ export default function Home() {
       </motion.h1>
 
       {/* FEATURES SECTION */}
-      <div className="grid sm:grid-cols-3 gap-10 mx-4 sm:mx-20 mt-10">
+      <motion.div className="grid sm:grid-cols-3 gap-10 mx-4 sm:mx-20 mt-10">
         {[
           {
             title: 'Fast & Reliable',
@@ -77,7 +77,9 @@ export default function Home() {
             desc: 'Because elegance is never loud — it simply stands out.',
           },
         ].map((card, i) => (
-          <div
+          <motion.div
+            animate={{ x: [-2000, 200, -200, 60] }}
+            transition={{ duration: 3.5, repeat: 3, ease: 'backInOut' }}
             key={i}
             className="p-6 rounded-xl border hover:shadow-xl transition-shadow bg-white"
           >
@@ -93,9 +95,9 @@ export default function Home() {
             >
               {card.desc}
             </motion.p>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* FINAL CTA */}
       <div className="text-center py-16">

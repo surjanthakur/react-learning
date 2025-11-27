@@ -1,7 +1,8 @@
-import { motion } from 'motion/react';
+import { motion, useScroll } from 'motion/react';
 import { Link, NavLink } from 'react-router-dom';
 
 export default function Header() {
+  const { scrollYProgress } = useScroll();
   return (
     <header className="shadow sticky z-50 top-0">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
@@ -86,6 +87,10 @@ export default function Header() {
           </div>
         </div>
       </nav>
+      <motion.div
+        style={{ scaleX: scrollYProgress }}
+        className="w-full h-2 bg-amber-500 origin-left"
+      ></motion.div>
     </header>
   );
 }
