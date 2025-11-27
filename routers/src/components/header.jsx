@@ -1,3 +1,4 @@
+import { motion } from 'motion/react';
 import { Link, NavLink } from 'react-router-dom';
 
 export default function Header() {
@@ -6,7 +7,9 @@ export default function Header() {
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-7xl">
           <Link to="/" className="flex items-center">
-            <img
+            <motion.img
+              whileHover={{ scale: 1.2 }}
+              transition={{ ease: 'backInOut' }}
               src="https://alexharkness.com/wp-content/uploads/2020/06/logo-2.png"
               className="mr-3 h-12"
               alt="Logo"

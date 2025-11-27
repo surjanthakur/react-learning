@@ -41,20 +41,25 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="absolute inset-0 w-full sm:my-20 sm:pt-1 pt-12 h-full">
+        <motion.div className="absolute inset-0 w-full sm:my-20 sm:pt-1 pt-12 h-full">
           <motion.img
-            whileHover={{ scale: 1.1, border: '4px solid red' }}
+            whileHover={{ scale: 1.2 }}
             className="w-96"
             src="https://i.pinimg.com/1200x/d3/a5/e9/d3a5e9251ff5ea8190ddd31283aa1f63.jpg"
             alt="hero-img"
           />
-        </div>
+        </motion.div>
       </aside>
 
       {/* SECTION TITLE */}
-      <h1 className="text-center text-2xl sm:text-5xl py-14 font-medium">
+      <motion.h1
+        whileHover={{ scale: 1.2, color: 'red' }}
+        animate={{ x: [-800, 100, 50, 100] }}
+        transition={{ duration: 2, repeat: 2, ease: 'anticipate' }}
+        className="text-center text-2xl sm:text-5xl py-14 font-medium"
+      >
         Lorem Ipsum Yojo
-      </h1>
+      </motion.h1>
 
       {/* FEATURES SECTION */}
       <div className="grid sm:grid-cols-3 gap-10 mx-4 sm:mx-20 mt-10">
@@ -95,7 +100,7 @@ export default function Home() {
       {/* FINAL CTA */}
       <div className="text-center py-16">
         <motion.h2
-          whileHover={{ scaleY: 1.4, scale: 1.2 }}
+          whileHover={{ scaleY: 1.4, scale: 1.2, color: 'red' }}
           className="text-3xl sm:text-4xl font-bold mb-4"
         >
           Ready to Start?
