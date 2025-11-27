@@ -1,7 +1,29 @@
+import axios from 'axios';
 import { useState } from 'react';
+import { useWeather } from '../context/weatherContext';
 
 export default function WeatherForm() {
   const [city, setCity] = useState('');
+  const { City, weatherData } = useWeather();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=04686a7ac53877a0115b545489c9fac1`
+        )
+        .then((response) => response.json())
+        .then((data) => {
+          weatherData(data);
+          console.log(data);
+          City(city);
+        });
+      setCity('');
+    } catch (error) {
+      console.error(' 💁🏻 Error while fetching weather data:', error);
+    }
+  };
 
   return (
     <form
