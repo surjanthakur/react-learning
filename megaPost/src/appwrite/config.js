@@ -1,4 +1,4 @@
-import { Client, Databases } from 'appwrite';
+import { Client, Databases, Storage } from 'appwrite';
 import ConfigEnv from '../config/configEnv';
 
 export class DatabseServices {
@@ -12,6 +12,7 @@ export class DatabseServices {
       .setProject(ConfigEnv.appwrite_project_Id);
 
     this.databases = new Databases(this.client);
+    this.bucket = new Storage(this.client);
   }
 }
 
