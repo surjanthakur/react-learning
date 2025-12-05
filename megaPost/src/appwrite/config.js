@@ -4,7 +4,7 @@ import ConfigEnv from '../config/configEnv';
 export class DatabseServices {
   client = new Client();
   databases;
-  bucket;
+  storage;
 
   constructor() {
     this.client
@@ -12,7 +12,7 @@ export class DatabseServices {
       .setProject(ConfigEnv.appwrite_project_Id);
 
     this.databases = new Databases(this.client);
-    this.bucket = new Storage(this.client);
+    this.storage = new Storage(this.client);
   }
 }
 
