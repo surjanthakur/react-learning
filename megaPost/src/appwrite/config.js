@@ -1,16 +1,16 @@
-import { Account, Client } from 'appwrite';
+import { Client, Databases } from 'appwrite';
 import ConfigEnv from '../config/configEnv';
 
 export class DatabseServices {
   client = new Client();
-  account;
+  database;
 
   constructor() {
     this.client
       .setEndpoint(ConfigEnv.appwrite_Url)
       .setProject(ConfigEnv.appwrite_project_Id);
 
-    this.account = new Account(this.client);
+    this.database = new Databases(this.client);
   }
 }
 
