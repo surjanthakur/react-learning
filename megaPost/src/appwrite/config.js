@@ -93,6 +93,34 @@ export class DatabseServices {
       console.error(err);
     }
   }
+
+  // image file upload services --------------------------------->
+
+  // upload file
+  async uploadFile(file) {
+    try {
+      return await this.storage.createFile({
+        bucketId: ConfigEnv.appwrite_bucket_Id,
+        fileId: ID.unique(),
+        file: file,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // delete file
+  async deleteFile(id) {
+    try {
+      await this.storage.deleteFile({
+        bucketId: ConfigEnv.appwrite_bucket_Id,
+        fileId: id,
+      });
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 }
 
 const services = new DatabseServices({});
