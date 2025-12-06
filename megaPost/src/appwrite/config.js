@@ -121,6 +121,18 @@ export class DatabseServices {
       return false;
     }
   }
+
+  // get image  preview link
+  async getFilePreview(fileId) {
+    try {
+      return this.storage.getFilePreview({
+        bucketId: ConfigEnv.bucketId,
+        fileId: fileId,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 const services = new DatabseServices({});
