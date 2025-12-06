@@ -68,7 +68,7 @@ export class DatabseServices {
     }
   }
 
-  // get active posts onlys
+  // get active posts only
   async getAllPosts(queries = [Query.equal('status', 'active')]) {
     try {
       return await this.databases.listDocuments({
