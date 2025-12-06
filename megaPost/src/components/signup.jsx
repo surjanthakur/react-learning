@@ -9,6 +9,27 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
 
 export default function Signup() {
+  const dispatch = useDispatcht();
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm();
+  const [error, setError] = useState('');
+
+  const createAccount = async (data) => {
+    setError('');
+    try {
+      const session = await authservice.createAccount(data);
+      if (session) {
+        const user = await authservice.getCurrentUser();
+        if (user) dispatch(authLogin(user));
+        toast.success('sinup successfully 🚀');
+        setTimeout(() => {
+          navigate('/');
+        }, 1000);
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
   return (
     <div className="flex items-center justify-center w-full">
       <div
@@ -34,7 +55,7 @@ export default function Signup() {
         {/* display error */}
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
 
-        <form onSubmit={handleSubmit(create)}>
+        <form>
           <div className="space-y-5">
             {/* name */}
             <Input
@@ -60,6 +81,7 @@ export default function Signup() {
           </div>
         </form>
       </div>
+      <Toaster />
     </div>
   );
 }
