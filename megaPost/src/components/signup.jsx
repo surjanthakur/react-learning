@@ -55,25 +55,40 @@ export default function Signup() {
         {/* display error */}
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
 
-        <form>
+        <form onSubmit={handleSubmit(createAccount)}>
           <div className="space-y-5">
             {/* name */}
             <Input
               label="Full Name: "
               type="text"
               placeholder="Enter your full name"
+              {...register('name', {
+                required: true,
+              })}
             />
             {/* email */}
             <Input
               label="Email: "
               placeholder="Enter your email"
               type="email"
+              {...register('email', {
+                required: true,
+                validate: {
+                  matchPatern: (value) =>
+                    /^(?![.])[a-zA-Z0-9._%+-]+(?<![.])@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+                      value
+                    ) || 'email address must be a valid address',
+                },
+              })}
             />
             {/* password */}
             <Input
               label="Password: "
               type="password"
               placeholder="Enter your password"
+              {...register('password', {
+                required: true,
+              })}
             />
             <Button type="submit" className="w-full">
               Create Account
