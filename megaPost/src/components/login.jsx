@@ -51,19 +51,31 @@ export default function Login() {
         </p>
         {/* display error */}
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-        <form>
+        <form onSubmit={handleSubmit(login)} className="mt-8">
           <div>
             {/* email */}
-            <input
+            <Input
               label="Email: "
               placeholder="Enter your email"
               type="email"
+              {...register('email', {
+                required: true,
+                validate: {
+                  matchPatern: (value) =>
+                    /^(?![.])[a-zA-Z0-9._%+-]+(?<![.])@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+                      value
+                    ) || 'email address must be a valid address',
+                },
+              })}
             />
             {/* password */}
-            <input
+            <Input
               label="Password: "
               type="password"
               placeholder="Enter your password"
+              {...register('password', {
+                required: true,
+              })}
             />
             <Button type="submit" className="w-full">
               Sign in
