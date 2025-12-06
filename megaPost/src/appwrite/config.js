@@ -1,4 +1,4 @@
-import { Client, Databases, Storage } from 'appwrite';
+import { Client, Databases, Query, Storage } from 'appwrite';
 import ConfigEnv from '../config/configEnv';
 
 export class DatabseServices {
@@ -15,6 +15,7 @@ export class DatabseServices {
     this.storage = new Storage(this.client);
   }
 
+  // create post
   async createPost({ title, slug, content, image, status, userId }) {
     try {
       return await this.databases.createDocument({
@@ -34,6 +35,7 @@ export class DatabseServices {
     }
   }
 
+  // update post
   async updatePost(slug, { title, content, image, status }) {
     try {
       return await this.databases.updateDocument({
@@ -53,6 +55,7 @@ export class DatabseServices {
     }
   }
 
+  // get post by id
   async getpost(slug) {
     try {
       return await this.databases.getDocument({
@@ -65,6 +68,20 @@ export class DatabseServices {
     }
   }
 
+  // get active posts onlys
+  async getAllPosts(queries = [Query.equal('status', 'active')]) {
+    try {
+      return await this.databases.listDocuments({
+        databaseId: ConfigEnv.appwrite_database_Id,
+        collectionId: ConfigEnv.appwrite_table_Id,
+        queries: queries,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // delete post by id
   async deletePost(slug) {
     try {
       await this.databases.deleteDocument({
