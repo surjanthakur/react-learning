@@ -45,11 +45,12 @@ class AuthService {
   //   get current user
   async getCurrentUser() {
     try {
-      return await this.account.get();
+      const user = await this.account.get();
+      return user;
     } catch (err) {
       console.log(err);
+      return null;
     }
-    return null;
   }
 
   //   log-out session
