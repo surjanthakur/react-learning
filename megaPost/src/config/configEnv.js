@@ -1,9 +1,9 @@
 const ConfigEnv = {
-  appwrite_Url: String(import.meta.env.vite_appwrite_url),
-  appwrite_project_Id: String(import.meta.env.vite_appwrite_projectid),
-  appwrite_database_Id: String(import.meta.env.vite_databaseid),
-  appwrite_table_Id: String(import.meta.env.vite_tabelid),
-  appwrite_bucket_Id: String(import.meta.env.vite_bucketid),
+  appwriteUrl: import.meta.env.VITE_APPWRITE_URL,
+  projectId: import.meta.env.VITE_APPWRITE_PROJECT_ID,
+  databaseId: import.meta.env.VITE_DATABASE_ID,
+  tableId: import.meta.env.VITE_TABLE_ID,
+  bucketId: import.meta.env.VITE_BUCKET_ID,
 };
 
 export default ConfigEnv;

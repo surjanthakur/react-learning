@@ -25,7 +25,11 @@ function App() {
   }, []);
   return (
     <>
-      {loading ? <h1>loading....</h1> : <div className="h-screen w-full"></div>}
+      {loading ? (
+        <h1>loading....</h1>
+      ) : (
+        <div className="h-screen w-full">its working</div>
+      )}
     </>
   );
 }

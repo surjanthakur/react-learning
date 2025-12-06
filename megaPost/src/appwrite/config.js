@@ -8,8 +8,8 @@ export class DatabseServices {
 
   constructor() {
     this.client
-      .setEndpoint(ConfigEnv.appwrite_Url)
-      .setProject(ConfigEnv.appwrite_project_Id);
+      .setEndpoint(ConfigEnv.appwriteUrl)
+      .setProject(ConfigEnv.projectId);
 
     this.databases = new Databases(this.client);
     this.storage = new Storage(this.client);
@@ -19,8 +19,8 @@ export class DatabseServices {
   async createPost({ title, slug, content, image, status, userId }) {
     try {
       return await this.databases.createDocument({
-        databaseId: ConfigEnv.appwrite_database_Id,
-        collectionId: ConfigEnv.appwrite_table_Id,
+        databaseId: ConfigEnv.databaseId,
+        collectionId: ConfigEnv.tableId,
         documentId: slug,
         data: {
           title,
@@ -39,8 +39,8 @@ export class DatabseServices {
   async updatePost(slug, { title, content, image, status }) {
     try {
       return await this.databases.updateDocument({
-        databaseId: ConfigEnv.appwrite_database_Id,
-        collectionId: ConfigEnv.appwrite_table_Id,
+        databaseId: ConfigEnv.databaseId,
+        collectionId: ConfigEnv.tableId,
         documentId: slug,
         data: {
           title,
@@ -59,8 +59,8 @@ export class DatabseServices {
   async getpost(slug) {
     try {
       return await this.databases.getDocument({
-        databaseId: ConfigEnv.appwrite_database_Id,
-        collectionId: ConfigEnv.appwrite_table_Id,
+        databaseId: ConfigEnv.databaseId,
+        collectionId: ConfigEnv.tableId,
         documentId: slug,
       });
     } catch (error) {
@@ -72,8 +72,8 @@ export class DatabseServices {
   async getAllPosts(queries = [Query.equal('status', 'active')]) {
     try {
       return await this.databases.listDocuments({
-        databaseId: ConfigEnv.appwrite_database_Id,
-        collectionId: ConfigEnv.appwrite_table_Id,
+        databaseId: ConfigEnv.databaseId,
+        collectionId: ConfigEnv.tableId,
         queries: queries,
       });
     } catch (error) {
@@ -85,8 +85,8 @@ export class DatabseServices {
   async deletePost(slug) {
     try {
       await this.databases.deleteDocument({
-        databaseId: ConfigEnv.appwrite_database_Id,
-        collectionId: ConfigEnv.appwrite_table_Id,
+        databaseId: ConfigEnv.databaseId,
+        collectionId: ConfigEnv.tableId,
         documentId: slug,
       });
     } catch (err) {
@@ -100,7 +100,7 @@ export class DatabseServices {
   async uploadFile(file) {
     try {
       return await this.storage.createFile({
-        bucketId: ConfigEnv.appwrite_bucket_Id,
+        bucketId: ConfigEnv.bucketId,
         fileId: ID.unique(),
         file: file,
       });
@@ -113,7 +113,7 @@ export class DatabseServices {
   async deleteFile(id) {
     try {
       await this.storage.deleteFile({
-        bucketId: ConfigEnv.appwrite_bucket_Id,
+        bucketId: ConfigEnv.bucketId,
         fileId: id,
       });
       return true;
