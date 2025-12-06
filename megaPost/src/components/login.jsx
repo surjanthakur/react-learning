@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { login as authLogin } from '../store/authSlice';
 import Button from './button';
@@ -21,7 +21,10 @@ export default function Login() {
       if (session) {
         const user = await authservice.getCurrentUser();
         if (user) dispatch(authLogin(user));
-        navigate('/');
+        toast.success('login successfully 🚀');
+        setTimeout(() => {
+          navigate('/');
+        }, 1000);
       }
     } catch (error) {
       setError(error.message);
@@ -83,6 +86,7 @@ export default function Login() {
           </div>
         </form>
       </div>
+      <Toaster />
     </div>
   );
 }
