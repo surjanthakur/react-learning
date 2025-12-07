@@ -10,19 +10,10 @@ body {
   width: 100%;
 }
 
-:root {
-  --bg-primary-color: #0c0c0c;
-  --text-primary-color: rgb(255, 255, 255);
-}
-
-html {
-  background-color: var(--bg-primary-color);
-  color: var(--text-primary-color);
-  font-family: sans-serif;
-}
-
 main,
 section {
+  background-color: black;
+  color: white;
   height: 100%;
   width: 100%;
 }
@@ -31,7 +22,22 @@ section {
 }
 
 .infos {
+  padding: 1rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
+  border-bottom: 1px solid white;
+}
+
+.board {
+  border: 2px solid white;
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 20px);
+}
+
+.block {
+  height: 30px;
+  width: 30px;
+  border: 1px solid white;
 }
