@@ -10,6 +10,26 @@ body {
   width: 100%;
 }
 
+:root {
+  --bg-primary-color: #0c0c0c;
+  --text-primary-color: rgb(255, 255, 255);
+}
+
+html {
+  background-color: var(--bg-primary-color);
+  color: var(--text-primary-color);
+  font-family: sans-serif;
+}
+
+main,
+section {
+  height: 100%;
+  width: 100%;
+}
+section {
+  padding: 1rem;
+}
+
 .infos {
   display: flex;
   flex-direction: row;
