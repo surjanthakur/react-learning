@@ -1,29 +1,29 @@
-import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import { login as authLogin } from '../store/authSlice';
-import Button from './button';
-import Input from './input';
-import { useDispatcht } from 'react-redux';
-import authservice from '../appwrite/auth';
-import toast, { Toaster } from 'react-hot-toast';
-import { useState } from 'react';
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { login as authLogin } from "../store/authSlice";
+import Button from "./button";
+import Input from "./input";
+import { useDispatch } from "react-redux";
+import authservice from "../appwrite/auth";
+import toast, { Toaster } from "react-hot-toast";
+import { useState } from "react";
 
 export default function Signup() {
-  const dispatch = useDispatcht();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const createAccount = async (data) => {
-    setError('');
+    setError("");
     try {
       const session = await authservice.createAccount(data);
       if (session) {
         const user = await authservice.getCurrentUser();
         if (user) dispatch(authLogin(user));
-        toast.success('sinup successfully 🚀');
+        toast.success("sinup successfully 🚀");
         setTimeout(() => {
-          navigate('/');
+          navigate("/");
         }, 1000);
       }
     } catch (error) {
@@ -62,7 +62,7 @@ export default function Signup() {
               label="Full Name: "
               type="text"
               placeholder="Enter your full name"
-              {...register('name', {
+              {...register("name", {
                 required: true,
               })}
             />
@@ -71,13 +71,13 @@ export default function Signup() {
               label="Email: "
               placeholder="Enter your email"
               type="email"
-              {...register('email', {
+              {...register("email", {
                 required: true,
                 validate: {
                   matchPatern: (value) =>
                     /^(?![.])[a-zA-Z0-9._%+-]+(?<![.])@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
                       value
-                    ) || 'email address must be a valid address',
+                    ) || "email address must be a valid address",
                 },
               })}
             />
@@ -86,7 +86,7 @@ export default function Signup() {
               label="Password: "
               type="password"
               placeholder="Enter your password"
-              {...register('password', {
+              {...register("password", {
                 required: true,
               })}
             />
