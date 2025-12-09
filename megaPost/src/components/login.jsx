@@ -1,29 +1,29 @@
-import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import { login as authLogin } from '../store/authSlice';
-import Button from './button';
-import Input from './input';
-import { useDispatcht } from 'react-redux';
-import authservice from '../appwrite/auth';
-import toast, { Toaster } from 'react-hot-toast';
-import { useState } from 'react';
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { login as authLogin } from "../store/authSlice";
+import Button from "./button";
+import Input from "./input";
+import { useDispatch } from "react-redux";
+import authservice from "../appwrite/auth";
+import toast, { Toaster } from "react-hot-toast";
+import { useState } from "react";
 
 export default function Login() {
-  const dispatch = useDispatcht();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const login = async (data) => {
-    setError('');
+    setError("");
     try {
       const session = await authservice.login(data);
       if (session) {
         const user = await authservice.getCurrentUser();
         if (user) dispatch(authLogin(user));
-        toast.success('login successfully 🚀');
+        toast.success("login successfully 🚀");
         setTimeout(() => {
-          navigate('/');
+          navigate("/");
         }, 1000);
       }
     } catch (error) {
@@ -61,13 +61,13 @@ export default function Login() {
               label="Email: "
               placeholder="Enter your email"
               type="email"
-              {...register('email', {
+              {...register("email", {
                 required: true,
                 validate: {
                   matchPatern: (value) =>
                     /^(?![.])[a-zA-Z0-9._%+-]+(?<![.])@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
                       value
-                    ) || 'email address must be a valid address',
+                    ) || "email address must be a valid address",
                 },
               })}
             />
@@ -76,7 +76,7 @@ export default function Login() {
               label="Password: "
               type="password"
               placeholder="Enter your password"
-              {...register('password', {
+              {...register("password", {
                 required: true,
               })}
             />
