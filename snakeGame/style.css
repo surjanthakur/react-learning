@@ -37,13 +37,16 @@ section {
   margin: 1rem auto;
   border: 2px solid rgb(227, 255, 12);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
-  grid-template-rows: repeat(auto-fit, minmax(30px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
   place-content: center;
 }
 
 .block {
-  height: 30px;
-  width: 30px;
   border: 0.5px solid rgba(255, 255, 255, 0.472);
+}
+
+.snakeColor {
+  background-color: rgb(249, 17, 17);
+  border-radius: 12px;
 }
