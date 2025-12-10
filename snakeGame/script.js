@@ -44,5 +44,5 @@ document.addEventListener('DOMContentLoaded', () => {
     snake.unshift(head);
     snake.pop();
     snakeRender();
-  }, 400);
+  }, 300);
 });
