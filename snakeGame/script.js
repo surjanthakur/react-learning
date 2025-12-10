@@ -1,13 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
+  //* select the board div.
   const board = document.querySelector('.board');
+
+  // each snake [block] hight & width.
   const blockHight = 50;
   const blockWidth = 50;
 
+  // get how many colums should we need in a entire board div ok  its [ board-width / block-width(50) ]
   const cols = Math.floor(board.clientWidth / blockWidth);
+
+  // get how many rows should we need in a entire board div ok  its [ board-hight / block-hight(50) ]
   const rows = Math.floor(board.clientHeight / blockHight);
 
+  // a blocks array where we store each block with their position-location.
   const blocks = [];
 
+  // in this loop we create blocks based on rows & colums length then append that block in board also each block have their position location based on which row & colum the block have.
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
       const block = document.createElement('div');
@@ -17,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // in this snake array we have snake with block location based on  x and y axis.
   const snake = [
     { x: 1, y: 20 },
     { x: 1, y: 21 },
