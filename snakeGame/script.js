@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { x: 1, y: 22 },
   ];
 
+  // *in this function we render the snake array.
   function snakeRender() {
     snake.forEach((el) => {
       blocks[`${el.x}-${el.y}`].classList.add('snakeColor');
