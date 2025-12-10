@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let directions = 'left';
 
+  // *render snake position every  3 seconds.
   setInterval(() => {
     let head = null;
     if (directions === 'left') {
