@@ -19,8 +19,8 @@ export default function Signup() {
     try {
       const session = await authservice.createAccount(data);
       if (session) {
-        const user = await authservice.getCurrentUser();
-        if (user) dispatch(authLogin(user));
+        const userData = await authservice.getCurrentUser();
+        if (userData) dispatch(authLogin(userData));
         toast.success("sinup successfully 🚀");
         setTimeout(() => {
           navigate("/");

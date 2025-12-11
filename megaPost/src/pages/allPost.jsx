@@ -22,7 +22,7 @@ export default function AllPost() {
         <div className="flex flex-wrap">
           {allPost.map((post) => (
             <div key={post.$id} className="p-2 w-1/4">
-              <PostCard post={post} />
+              <PostCard $id={post.$id} image={post.image} title={post.title} />
             </div>
           ))}
         </div>
