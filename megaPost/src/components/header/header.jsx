@@ -1,36 +1,36 @@
-import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import Container from '../../container/container';
-import LogoutBtn from '../header/logoutBtn';
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import Container from "../../container/container";
+import LogoutBtn from "../header/logoutBtn";
 
 function Header() {
-  const authStatus = useSelector((state) => state.auth.status);
+  const authStatus = useSelector((state) => state?.auth?.status);
   const navigate = useNavigate();
 
   const navItems = [
     {
-      name: 'Home',
-      slug: '/',
+      name: "Home",
+      slug: "/",
       active: true,
     },
     {
-      name: 'Login',
-      slug: '/login',
+      name: "Login",
+      slug: "/login",
       active: !authStatus,
     },
     {
-      name: 'Signup',
-      slug: '/signup',
+      name: "Signup",
+      slug: "/signup",
       active: !authStatus,
     },
     {
-      name: 'All Posts',
-      slug: '/all-posts',
+      name: "All Posts",
+      slug: "/all-posts",
       active: authStatus,
     },
     {
-      name: 'Add Post',
-      slug: '/add-post',
+      name: "Add Post",
+      slug: "/add-post",
       active: authStatus,
     },
   ];

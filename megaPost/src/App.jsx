@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import authservice from './appwrite/auth';
-import { login, logout } from './store/authSlice';
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import authservice from "./appwrite/auth";
+import { login, logout } from "./store/authSlice";
+import Header from "./components/header/header";
+import Footer from "./components/footer/footer";
+import { Outlet } from "react-router-dom";
 
-import './App.css';
+import "./App.css";
 
 function App() {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // check if the user is authenticated or not
   useEffect(() => {
@@ -23,15 +26,18 @@ function App() {
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, []);
-  return (
-    <>
-      {loading ? (
-        <h1>loading....</h1>
-      ) : (
-        <div className="h-screen w-full">its working</div>
-      )}
-    </>
-  );
+
+  return !loading ? (
+    <div className="min-h-screen flex flex-wrap content-between bg-gray-400">
+      <div className="w-full block">
+        <Header />
+        <main>
+          TODO: <Outlet />
+        </main>
+        <Footer />
+      </div>
+    </div>
+  ) : null;
 }
 
 export default App;
