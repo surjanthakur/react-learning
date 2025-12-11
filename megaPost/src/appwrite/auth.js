@@ -38,7 +38,7 @@ class AuthService {
 
       if (user) return user;
     } catch (err) {
-      throw err;
+      console.log("error from login: ", err);
     }
   }
 

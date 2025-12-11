@@ -58,7 +58,7 @@ export default function Login() {
           <div>
             {/* email */}
             <Input
-              label="Email: "
+              label="email: "
               placeholder="Enter your email"
               type="email"
               {...register("email", {
