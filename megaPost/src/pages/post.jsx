@@ -11,7 +11,7 @@ export default function Post() {
   const { slug } = useParams();
   const navigate = useNavigate();
 
-  const userData = useSelector((state) => state.auth.userData);
+  const userData = useSelector((state) => state?.auth?.userData);
 
   const isAuthor = post && userData ? post.userId === userData.$id : false;
 
@@ -25,9 +25,9 @@ export default function Post() {
   }, [slug, navigate]);
 
   const deletePost = () => {
-    appwriteService.deletePost(post.$id).then((status) => {
+    services.deletePost(post.$id).then((status) => {
       if (status) {
-        appwriteService.deleteFile(post.featuredImage);
+        services.deleteFile(post.image);
         navigate("/");
       }
     });
