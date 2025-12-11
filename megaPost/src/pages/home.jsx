@@ -29,7 +29,7 @@ export default function HomePage() {
         <div className="flex flex-wrap ">
           {posts.map((post) => (
             <div key={post.$id} className="p-2 w-1/4">
-              <PostCard {...post} />
+              <PostCard $id={post.$id} title={post.title} image={post.image} />
             </div>
           ))}
         </div>
