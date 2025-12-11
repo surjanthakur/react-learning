@@ -5,7 +5,6 @@ import { login, logout } from "./store/authSlice";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
 import { Outlet } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 
 import "./App.css";
 
