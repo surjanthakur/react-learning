@@ -5,7 +5,7 @@ import Button from "./button";
 import Input from "./input";
 import { useDispatch } from "react-redux";
 import authservice from "../appwrite/auth";
-import toast, { Toaster } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { useState } from "react";
 
 export default function Login() {
