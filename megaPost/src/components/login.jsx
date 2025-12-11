@@ -30,8 +30,8 @@ export default function Login() {
       setError(error.message);
     }
   };
-  retun(
-    <div className="flex items-center justify-center w-full">
+  return (
+    <div className="flex items-center justify-center w-full m-6">
       <div
         className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
       >
@@ -41,7 +41,7 @@ export default function Login() {
           </span>
         </div>
         <h2 className="text-center text-2xl font-bold leading-tight">
-          Sign in to your account
+          login in to your account
         </h2>
         <p className="mt-2 text-center text-base text-black/60">
           Don&apos;t have any account?&nbsp;
