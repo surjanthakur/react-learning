@@ -1,5 +1,5 @@
-import { Client, Databases, Query, Storage } from 'appwrite';
-import ConfigEnv from '../config/configEnv';
+import { Client, Databases, Query, Storage } from "appwrite";
+import ConfigEnv from "../config/configEnv";
 
 export class DatabseServices {
   client = new Client();
@@ -69,7 +69,7 @@ export class DatabseServices {
   }
 
   // get active posts only
-  async getAllPosts(queries = [Query.equal('status', 'active')]) {
+  async getAllPosts(queries = [Query.equal("status", "active")]) {
     try {
       return await this.databases.listDocuments({
         databaseId: ConfigEnv.databaseId,

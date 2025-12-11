@@ -17,7 +17,7 @@ export default function Post() {
 
   useEffect(() => {
     if (slug) {
-      appwriteService.getPost(slug).then((post) => {
+      services.getpost(slug).then((post) => {
         if (post) setPost(post);
         else navigate("/");
       });
@@ -38,7 +38,7 @@ export default function Post() {
       <Container>
         <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
           <img
-            src={appwriteService.getFilePreview(post.image)}
+            src={services.getFilePreview(post.image)}
             alt={post.title}
             className="rounded-xl"
           />
