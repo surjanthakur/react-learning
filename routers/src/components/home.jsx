@@ -1,11 +1,39 @@
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 
 export default function Home() {
+  // Scroll refs
+  const heroRef = useRef(null);
+  const sectionRef = useRef(null);
+  const cardRef = useRef(null);
+
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroRef,
+    offset: ["0 1", "1 0"], // Enter → Exit
+  });
+
+  const heroOpacity = useTransform(heroScroll, [0, 1], [0, 1]);
+  const heroY = useTransform(heroScroll, [0, 1], [80, 0]);
+
+  const { scrollYProgress: titleScroll } = useScroll({
+    target: sectionRef,
+    offset: ["0 1", "1 0"],
+  });
+
+  const titleScale = useTransform(titleScroll, [0, 1], [0.7, 1]);
+  const titleY = useTransform(titleScroll, [0, 1], [50, 0]);
+
   return (
     <div className="mx-auto w-full max-w-7xl">
       {/* HERO SECTION */}
-      <aside className="relative overflow-hidden text-black rounded-lg sm:mx-16 mx-2 sm:py-16">
-        <div className="relative z-10 max-w-7xl px-4 pb-20 pt-10 sm:py-24 mx-auto sm:px-6 lg:px-8">
+      <aside
+        ref={heroRef}
+        className="relative overflow-hidden text-black rounded-lg sm:mx-16 mx-2 sm:py-16"
+      >
+        <motion.div
+          style={{ opacity: heroOpacity, y: heroY }}
+          className="relative z-10 max-w-7xl px-4 pb-20 pt-10 sm:py-24 mx-auto sm:px-6 lg:px-8"
+        >
           <div className="max-w-xl sm:mt-1 mt-80 space-y-8 text-center sm:text-right sm:ml-auto">
             <motion.h2
               className="text-4xl font-bold sm:text-5xl leading-tight"
@@ -22,8 +50,8 @@ export default function Home() {
             </p>
 
             <motion.button
-              whileHover={{ scale: 1.2, backgroundColor: 'green' }}
-              transition={{ ease: 'backInOut' }}
+              whileHover={{ scale: 1.2, backgroundColor: "green" }}
+              transition={{ ease: "backInOut" }}
               className="inline-flex text-white items-center px-6 py-3 font-medium bg-orange-700 rounded-lg hover:opacity-80 transition-all gap-2"
             >
               <svg
@@ -39,7 +67,7 @@ export default function Home() {
               Download now
             </motion.button>
           </div>
-        </div>
+        </motion.div>
 
         <motion.div className="absolute inset-0 w-full sm:my-20 sm:pt-1 pt-12 h-full">
           <motion.img
@@ -53,44 +81,49 @@ export default function Home() {
 
       {/* SECTION TITLE */}
       <motion.h1
-        whileHover={{ scale: 1.2, color: 'red' }}
-        animate={{ x: [-800, 100, 50, 100] }}
-        transition={{ duration: 2, repeat: 2, ease: 'anticipate' }}
+        ref={sectionRef}
+        style={{ scale: titleScale, y: titleY }}
         className="text-center text-2xl sm:text-5xl py-14 font-medium"
       >
         Lorem Ipsum Yojo
       </motion.h1>
 
       {/* FEATURES SECTION */}
-      <motion.div className="grid sm:grid-cols-3 gap-10 mx-4 sm:mx-20 mt-10">
+      <motion.div
+        ref={cardRef}
+        className="grid sm:grid-cols-3 gap-10 mx-4 sm:mx-20 mt-10"
+      >
         {[
           {
-            title: 'Fast & Reliable',
-            desc: 'A quick stride forward, skipping the clutter, cruising smoothly.',
+            title: "Fast & Reliable",
+            desc: "A quick stride forward, skipping the clutter, cruising smoothly.",
           },
           {
-            title: 'Secure by Design',
-            desc: 'Old-school principles with new-age armor stitched together.',
+            title: "Secure by Design",
+            desc: "Old-school principles with new-age armor stitched together.",
           },
           {
-            title: 'Beautifully Simple',
-            desc: 'Because elegance is never loud — it simply stands out.',
+            title: "Beautifully Simple",
+            desc: "Because elegance is never loud — it simply stands out.",
           },
         ].map((card, i) => (
           <motion.div
-            animate={{ x: [-2000, 200, -200, 60] }}
-            transition={{ duration: 3.5, repeat: 3, ease: 'backInOut' }}
             key={i}
+            initial={{ opacity: 0, y: 80 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: i * 0.2 }}
             className="p-6 rounded-xl border hover:shadow-xl transition-shadow bg-white"
           >
             <motion.h3
-              whileHover={{ color: 'red', scale: 1.1 }}
+              whileHover={{ color: "red", scale: 1.1 }}
               className="text-gray-600 text-xl font-semibold mb-2"
             >
               {card.title}
             </motion.h3>
+
             <motion.p
-              whileHover={{ color: 'green', scale: 1.1 }}
+              whileHover={{ color: "green", scale: 1.1 }}
               className="text-gray-600"
             >
               {card.desc}
@@ -102,20 +135,20 @@ export default function Home() {
       {/* FINAL CTA */}
       <div className="text-center py-16">
         <motion.h2
-          whileHover={{ scaleY: 1.4, scale: 1.2, color: 'red' }}
+          whileHover={{ scaleY: 1.4, scale: 1.2, color: "red" }}
           className="text-3xl sm:text-4xl font-bold mb-4"
         >
           Ready to Start?
         </motion.h2>
+
         <p className="max-w-xl mx-auto text-gray-700 mb-8">
           Every journey begins with a click — and this one might just surprise
           you.
         </p>
 
         <motion.button
-          whileHover={{ scale: 1.2, backgroundColor: 'green' }}
-          transition={{ ease: 'backInOut' }}
-          to="/"
+          whileHover={{ scale: 1.2, backgroundColor: "green" }}
+          transition={{ ease: "backInOut" }}
           className="px-8 py-4 bg-black text-white rounded-xl hover:bg-gray-900 transition-all"
         >
           Get Started
