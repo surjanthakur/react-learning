@@ -57,3 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     snakeRender();
   }, 300);
 });
+
+addEventListener('keydown', (e) => {
+  console.log(e.key);
+});
