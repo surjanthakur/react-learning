@@ -93,6 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
   RestartGame.addEventListener('click', restartGame);
 
   function restartGame() {
+    directions = 'down';
+    snake.forEach((block) => {
+      blocks[`${block.x}-${block.y}`].classList.remove('snakeColor');
+    });
+    blocks[`${snakeFood.x}-${snakeFood.y}`].classList.remove('food');
     modal.style.display = 'none';
     snake = [{ x: 1, y: 3 }];
     snakeFood = {
