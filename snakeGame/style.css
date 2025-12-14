@@ -50,3 +50,8 @@ section {
   background-color: rgb(249, 17, 17);
   border-radius: 12px;
 }
+
+.food {
+  background-color: rgb(36, 249, 17);
+  border-radius: 12px;
+}

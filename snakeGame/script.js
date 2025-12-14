@@ -6,16 +6,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const blockHight = 50;
   const blockWidth = 50;
 
-  //* get how many colums should we need in a entire board div ok  its [ board-width / block-width(50) ]
   const cols = Math.floor(board.clientWidth / blockWidth);
 
-  //* get how many rows should we need in a entire board div ok  its [ board-hight / block-hight(50) ]
   const rows = Math.floor(board.clientHeight / blockHight);
 
-  //* a blocks array where we store each block with their position-location.
   const blocks = [];
 
-  //* in this loop we create blocks based on rows & colums length then append that block in board also each block have their position location based on which row & colum the block have.
+  let intervalid = null;
+
+  let snakeFood = {
+    x: Math.floor(Math.random() * rows),
+    y: Math.floor(Math.random() * cols),
+  };
+
+  const snake = [{ x: 1, y: 20 }];
+
+  let directions = 'right';
+
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
       const block = document.createElement('div');
@@ -25,17 +32,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  //*in this snake array we have snake with block location based on  x and y axis.
-  const snake = [{ x: 1, y: 20 }];
-
-  // *in this function we render the snake array.
   function snakeRender() {
+    let head = null;
+    blocks[`${snakeFood.x}-${snakeFood.y}`].classList.add('food');
+
+    if (directions === 'right') {
+      head = { x: snake[0].x, y: snake[0].y + 1 };
+    } else if (directions === 'left') {
+      head = { x: snake[0].x, y: snake[0].y - 1 };
+    } else if (directions === 'up') {
+      head = { x: snake[0].x - 1, y: snake[0].y };
+    } else if (directions == 'down') {
+      head = { x: snake[0].x + 1, y: snake[0].y };
+    }
+
+    if (head.x < 0 || head.x >= rows || head.y < 0 || head.y >= cols) {
+      clearInterval(intervalid);
+      alert('game is over');
+    }
+
+    if (snakeFood.x == head.x && snakeFood.y == head.y) {
+      blocks[`${snakeFood.x}-${snakeFood.y}`].classList.remove('food');
+      snakeFood = {
+        x: Math.floor(Math.random() * rows),
+        y: Math.floor(Math.random() * cols),
+      };
+      blocks[`${snakeFood.x}-${snakeFood.y}`].classList.add('food');
+      snake.unshift(head);
+    }
+    snake.forEach((block) => {
+      blocks[`${block.x}-${block.y}`].classList.remove('snakeColor');
+    });
+    snake.unshift(head);
+    snake.pop();
+
     snake.forEach((el) => {
       blocks[`${el.x}-${el.y}`].classList.add('snakeColor');
     });
   }
 
-  let directions = 'right';
+  // !run this interval after  every 300ms
+  intervalid = setInterval(() => {
+    snakeRender();
+  }, 300);
+
   addEventListener('keydown', (e) => {
     if (e.key == 'ArrowUp') {
       directions = 'up';
@@ -47,24 +87,4 @@ document.addEventListener('DOMContentLoaded', () => {
       directions = 'left';
     }
   });
-
-  setInterval(() => {
-    let head = null;
-    if (directions === 'right') {
-      head = { x: snake[0].x, y: snake[0].y + 1 };
-    } else if (directions === 'left') {
-      head = { x: snake[0].x, y: snake[0].y - 1 };
-    } else if (directions === 'up') {
-      head = { x: snake[0].x - 1, y: snake[0].y };
-    } else if (directions == 'down') {
-      head = { x: snake[0].x + 1, y: snake[0].y };
-    }
-
-    snake.forEach((block) => {
-      blocks[`${block.x}-${block.y}`].classList.remove('snakeColor');
-    });
-    snake.unshift(head);
-    snake.pop();
-    snakeRender();
-  }, 300);
 });
