@@ -1,33 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
   //* select the board div.
   const board = document.querySelector('.board');
+
   const scoreBoard = document.querySelector('.score');
   const highSocre = document.querySelector('.high-score');
+
   const startGame = document.querySelector('.start-btn');
+  const modal = document.querySelector('.modal');
+
+  const startgamemodal = document.querySelector('.start-game');
+  const gameOvermodal = document.querySelector('.game-over');
+  const RestartGame = document.querySelector('.btn-restart');
 
   //* each snake [block] hight & width.
   const blockHight = 50;
   const blockWidth = 50;
 
   const cols = Math.floor(board.clientWidth / blockWidth);
-
   const rows = Math.floor(board.clientHeight / blockHight);
 
   const blocks = [];
-
   let intervalid = null;
-
   let score = 0;
+  let directions = 'right';
+  let snake = [{ x: 1, y: 20 }];
 
+  // *create random snake food in board
   let snakeFood = {
     x: Math.floor(Math.random() * rows),
     y: Math.floor(Math.random() * cols),
   };
 
-  const snake = [{ x: 1, y: 20 }];
-
-  let directions = 'right';
-
+  // *create blocks and colums
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
       const block = document.createElement('div');
@@ -52,10 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (head.x < 0 || head.x >= rows || head.y < 0 || head.y >= cols) {
+      modal.style.display = 'flex';
+      startgamemodal.style.display = 'none';
+      gameOvermodal.style.display = 'flex';
       clearInterval(intervalid);
-      score = 0;
-      scoreBoard.innerHTML = `score : ${score}`;
-      alert('game is over');
+      return;
     }
 
     if (snakeFood.x == head.x && snakeFood.y == head.y) {
@@ -66,8 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       blocks[`${snakeFood.x}-${snakeFood.y}`].classList.add('food');
       snake.unshift(head);
-      score += 1;
-      scoreBoard.innerHTML = `score : ${score}`;
     }
     snake.forEach((block) => {
       blocks[`${block.x}-${block.y}`].classList.remove('snakeColor');
@@ -80,10 +83,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // !run this interval after  every 300ms
-  intervalid = setInterval(() => {
-    snakeRender();
-  }, 300);
+  startGame.addEventListener('click', () => {
+    modal.style.display = 'none';
+    intervalid = setInterval(() => {
+      snakeRender();
+    }, 300);
+  });
+
+  RestartGame.addEventListener('click', restartGame);
+
+  function restartGame() {
+    modal.style.display = 'none';
+    snake = [{ x: 1, y: 3 }];
+    snakeFood = {
+      x: Math.floor(Math.random() * rows),
+      y: Math.floor(Math.random() * cols),
+    };
+    intervalid = setInterval(() => {
+      snakeRender();
+    }, 300);
+  }
 
   addEventListener('keydown', (e) => {
     if (e.key == 'ArrowUp') {
