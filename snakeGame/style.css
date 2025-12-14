@@ -55,3 +55,39 @@ section {
   background-color: rgb(36, 249, 17);
   border-radius: 12px;
 }
+
+.modal {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: rgba(84, 83, 83, 0.734);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal .start-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.start-btn {
+  height: 60px;
+  width: 120px;
+  background-color: rgb(242, 40, 40);
+  color: black;
+  font-size: large;
+  font-weight: 800;
+  font-family: 'Courier New', Courier, monospace;
+  box-shadow: 12px 12px 12px black;
+}
+
+.start-game h2 {
+  font-size: xx-large;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 900;
+}

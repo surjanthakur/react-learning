@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   //* select the board div.
   const board = document.querySelector('.board');
+  const scoreBoard = document.querySelector('.score');
+  const highSocre = document.querySelector('.high-score');
+  const startGame = document.querySelector('.start-btn');
 
   //* each snake [block] hight & width.
   const blockHight = 50;
@@ -13,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const blocks = [];
 
   let intervalid = null;
+
+  let score = 0;
 
   let snakeFood = {
     x: Math.floor(Math.random() * rows),
@@ -48,6 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (head.x < 0 || head.x >= rows || head.y < 0 || head.y >= cols) {
       clearInterval(intervalid);
+      score = 0;
+      scoreBoard.innerHTML = `score : ${score}`;
       alert('game is over');
     }
 
@@ -59,6 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       blocks[`${snakeFood.x}-${snakeFood.y}`].classList.add('food');
       snake.unshift(head);
+      score += 1;
+      scoreBoard.innerHTML = `score : ${score}`;
     }
     snake.forEach((block) => {
       blocks[`${block.x}-${block.y}`].classList.remove('snakeColor');
