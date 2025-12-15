@@ -75,6 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       blocks[`${snakeFood.x}-${snakeFood.y}`].classList.add('food');
       snake.unshift(head);
+      score += 10;
+      scoreBoard.innerHTML = `Score: ${score}`;
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('highScore', highScore);
+      }
     }
     // -------------------------------------------------------->
 
@@ -98,18 +104,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   RestartGame.addEventListener('click', restartGame);
 
+  // restart game logic
   function restartGame() {
-    directions = 'down';
+    blocks[`${snakeFood.x}-${snakeFood.y}`].classList.remove('food');
     snake.forEach((block) => {
       blocks[`${block.x}-${block.y}`].classList.remove('snakeColor');
     });
-    blocks[`${snakeFood.x}-${snakeFood.y}`].classList.remove('food');
+
+    score = 0;
+    timeSpan = `00-00`;
+    directions = 'down';
     modal.style.display = 'none';
     snake = [{ x: 1, y: 3 }];
+
     snakeFood = {
       x: Math.floor(Math.random() * rows),
       y: Math.floor(Math.random() * cols),
     };
+
     intervalid = setInterval(() => {
       snakeRender();
     }, 300);
