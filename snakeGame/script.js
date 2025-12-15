@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let intervalid = null;
   let score = 0;
   let highScore = 0;
-  let timeSpan = 0;
+  let timeSpan = `00-00`;
   let directions = 'right';
   let snake = [{ x: 1, y: 20 }];
 
@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
       head = { x: snake[0].x + 1, y: snake[0].y };
     }
 
+    // game over logic
     if (head.x < 0 || head.x >= rows || head.y < 0 || head.y >= cols) {
       modal.style.display = 'flex';
       startgamemodal.style.display = 'none';
@@ -65,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(intervalid);
       return;
     }
-
+    // food cousume logic --------------------------------->
     if (snakeFood.x == head.x && snakeFood.y == head.y) {
       blocks[`${snakeFood.x}-${snakeFood.y}`].classList.remove('food');
       snakeFood = {
@@ -75,6 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
       blocks[`${snakeFood.x}-${snakeFood.y}`].classList.add('food');
       snake.unshift(head);
     }
+    // -------------------------------------------------------->
+
     snake.forEach((block) => {
       blocks[`${block.x}-${block.y}`].classList.remove('snakeColor');
     });
