@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const scoreBoard = document.querySelector('.score');
   const highSocre = document.querySelector('.high-score');
+  const time = document.querySelector('.time');
 
   const startGame = document.querySelector('.start-btn');
   const modal = document.querySelector('.modal');
