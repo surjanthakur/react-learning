@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const blocks = [];
   let intervalid = null;
   let score = 0;
+  let highScore = 0;
+  let timeSpan = 0;
   let directions = 'right';
   let snake = [{ x: 1, y: 20 }];
 
