@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const board = document.querySelector('.board');
 
   const scoreBoard = document.querySelector('.score');
-  const highSocre = document.querySelector('.high-score');
+  const highScoreBoard = document.querySelector('.high-score');
   const time = document.querySelector('.time');
 
   const startGame = document.querySelector('.start-btn');
@@ -22,8 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const blocks = [];
   let intervalid = null;
+  let timeIntervalid = null;
   let score = 0;
-  let highScore = 0;
+  let highScore = localStorage.getItem('highScore') || 0;
+  highScoreBoard.innerHTML = `highScore: ${highScore}`;
   let timeSpan = `00-00`;
   let directions = 'right';
   let snake = [{ x: 1, y: 20 }];
@@ -100,6 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
     intervalid = setInterval(() => {
       snakeRender();
     }, 300);
+
+    timeIntervalid = setInterval(() => {});
   });
 
   RestartGame.addEventListener('click', restartGame);
@@ -116,6 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
     directions = 'down';
     modal.style.display = 'none';
     snake = [{ x: 1, y: 3 }];
+
+    scoreBoard.innerHTML = `Score : ${score}`;
+    highScore.innerHTML = `HighScore : ${highScore}`;
+    time.innerHTML = `time : ${timeSpan}`;
 
     snakeFood = {
       x: Math.floor(Math.random() * rows),
