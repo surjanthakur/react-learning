@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   highScoreBoard.innerHTML = `highScore: ${highScore}`;
   let timeSpan = `00-00`;
   let directions = 'right';
-  let snake = [{ x: 1, y: 20 }];
+  let snake = [{ x: 1, y: 12 }];
 
   // *create random snake food in board
   let snakeFood = {
@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let head = null;
     blocks[`${snakeFood.x}-${snakeFood.y}`].classList.add('food');
 
+    // snake head direaction logic -------------------------->
     if (directions === 'right') {
       head = { x: snake[0].x, y: snake[0].y + 1 };
     } else if (directions === 'left') {
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
       head = { x: snake[0].x + 1, y: snake[0].y };
     }
 
-    // game over logic
+    // game over logic ----------------------------->
     if (head.x < 0 || head.x >= rows || head.y < 0 || head.y >= cols) {
       modal.style.display = 'flex';
       startgamemodal.style.display = 'none';
@@ -103,7 +104,17 @@ document.addEventListener('DOMContentLoaded', () => {
       snakeRender();
     }, 300);
 
-    timeIntervalid = setInterval(() => {});
+    timeIntervalid = setInterval(() => {
+      let [min, sec] = timeSpan.split('-').map(Number);
+      if (sec == 59) {
+        min += 1;
+        sec = 0;
+      } else {
+        sec += 1;
+      }
+      timeSpan = `${min.toString()}-${sec.toString()}`;
+      time.innerHTML = `Time: ${timeSpan}`;
+    }, 1000);
   });
 
   RestartGame.addEventListener('click', restartGame);
