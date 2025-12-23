@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('highScore', highScore);
       }
     }
-    // -------------------------------------------------------->
+    // ---------------------------------xx----------------------->
 
     snake.forEach((block) => {
       blocks[`${block.x}-${block.y}`].classList.remove('snakeColor');
