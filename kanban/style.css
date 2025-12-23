@@ -9,3 +9,25 @@ body {
   height: 100%;
   width: 100%;
 }
+
+body {
+  background-color: black;
+  color: white;
+}
+
+nav {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav button {
+  height: 50px;
+  width: 140px;
+  border: none;
+  border-radius: 12px;
+  background-color: rgb(161, 68, 248);
+  color: white;
+  font-size: larger;
+}
