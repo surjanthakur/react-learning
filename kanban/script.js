@@ -22,9 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
       column.classList.remove("hover-over");
     });
 
+    column.addEventListener("dragover", (e) => {
+      e.preventDefault();
+    });
+
     column.addEventListener("drop", (e) => {
       e.preventDefault();
       column.appendChild(currDraggedElement);
+      column.classList.remove("hover-over");
     });
   }
 
