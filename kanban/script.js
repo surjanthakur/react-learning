@@ -6,18 +6,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleModalButton = document.querySelector(".toggle-modal");
   const modal = document.querySelector(".modal");
   const modalbg = document.querySelector(".modal .bg");
+  const addTaskButton = document.querySelector("#add-new-task");
   let currDraggedElement = null;
 
   toggleModalButton.addEventListener("click", () => {
     modal.classList.toggle("active");
   });
-
   modalbg.addEventListener("click", () => {
     modal.classList.remove("active");
   });
 
+  addTaskButton.addEventListener("click", () => {
+    const taskTitle = document.querySelector("#title").value;
+    const taskDescription = document.querySelector("#description").value;
+    const div = document.createElement("div");
+    div.classList.add("task");
+    div.setAttribute("draggable", "true");
+    div.innerHTML = `
+    <h2>${taskTitle}</h2>
+    <p>${taskDescription} </p>
+    <button>delete</button>`;
+    todo.appendChild(div);
+    div.addEventListener("drag", () => {
+      currDraggedElement = div;
+    });
+    modal.classList.remove("active");
+  });
+
   tasks.forEach((task) => {
-    task.addEventListener("drag", (e) => {
+    task.addEventListener("drag", () => {
       currDraggedElement = task;
     });
   });
