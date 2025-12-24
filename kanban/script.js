@@ -13,5 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       column.classList.add("hover-over");
     });
+
+    column.addEventListener("dragleave", (e) => {
+      e.preventDefault();
+      column.classList.remove("hover-over");
+    });
   }
 });
