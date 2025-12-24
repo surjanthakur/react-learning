@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const tasks = document.querySelectorAll(".task");
 
   tasks.forEach((task) => {
-    task.addEventListener("drag", () => {});
+    task.addEventListener("drag", (e) => {});
   });
 
   function addDragEvents(column) {
@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     column.addEventListener("dragleave", (e) => {
       e.preventDefault();
       column.classList.remove("hover-over");
+    });
+
+    column.addEventListener("drop", (e) => {
+      e.preventDefault();
     });
   }
 
