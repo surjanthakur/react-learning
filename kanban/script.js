@@ -8,11 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
     task.addEventListener("drag", () => {});
   });
 
-  progress.addEventListener("dragenter", (e) => {
-    progress.classList.add("hover-over");
-  });
-
-  progress.addEventListener("dragleave", (e) => {
-    progress.classList.remove("hover-over");
-  });
+  function addDragEvents(column) {
+    column.addEventListener("dragenter", (e) => {
+      e.preventDefault();
+      column.classList.add("hover-over");
+    });
+  }
 });
