@@ -3,9 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const progress = document.querySelector("#progress");
   const done = document.querySelector("#done");
   const tasks = document.querySelectorAll(".task");
+  let currDraggedElement = null;
 
   tasks.forEach((task) => {
-    task.addEventListener("drag", (e) => {});
+    task.addEventListener("drag", (e) => {
+      currDraggedElement = task;
+    });
   });
 
   function addDragEvents(column) {
@@ -21,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     column.addEventListener("drop", (e) => {
       e.preventDefault();
+      column.appendChild(currDraggedElement);
     });
   }
 
