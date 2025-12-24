@@ -19,4 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
       column.classList.remove("hover-over");
     });
   }
+
+  addDragEvents(todo);
+  addDragEvents(progress);
+  addDragEvents(done);
 });
