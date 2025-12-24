@@ -98,15 +98,21 @@ section .task-column .task button {
 .modal {
   position: fixed;
   height: 100vh;
-  width: 100vh;
+  width: 100%;
   top: 0;
   left: 0;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
 }
 
+.modal.active {
+  display: flex;
+}
+
 .modal .center {
+  height: 300px;
+  width: 500px;
   padding: 2rem;
   background-color: rgb(200, 165, 121);
   color: black;
@@ -119,6 +125,10 @@ section .task-column .task button {
 
 .modal .bg {
   position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(90, 89, 89, 0.845);
+  filter: blur(60px);
 }
 
 .modal .center input,
@@ -139,4 +149,6 @@ section .task-column .task button {
   border-radius: 12px;
   border: none;
   margin-top: 0.5rem;
+  align-self: center;
+  width: 120px;
 }
