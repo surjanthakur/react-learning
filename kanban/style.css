@@ -127,7 +127,7 @@ section .task-column .task button {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: rgba(90, 89, 89, 0.845);
+  background-color: rgba(90, 89, 89, 0.923);
   filter: blur(60px);
 }
 

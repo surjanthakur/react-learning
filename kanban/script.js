@@ -3,7 +3,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const progress = document.querySelector("#progress");
   const done = document.querySelector("#done");
   const tasks = document.querySelectorAll(".task");
+  const toggleModalButton = document.querySelector(".toggle-modal");
+  const modal = document.querySelector(".modal");
+  const modalbg = document.querySelector(".modal .bg");
   let currDraggedElement = null;
+
+  toggleModalButton.addEventListener("click", () => {
+    modal.classList.toggle("active");
+  });
+
+  modalbg.addEventListener("click", () => {
+    modal.classList.remove("active");
+  });
 
   tasks.forEach((task) => {
     task.addEventListener("drag", (e) => {
