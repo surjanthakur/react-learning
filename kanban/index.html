@@ -12,7 +12,34 @@
         <div class="left">kanban</div>
         <div class="right"><button>add new task</button></div>
       </nav>
-      <section class="board"></section>
+      <section class="board">
+        <!-- todo -->
+        <div id="todo" class="task-column">
+          <div class="heading">
+            <div class="left">todo</div>
+            <div class="right">count</div>
+          </div>
+          <div draggable="true" class="task">
+            <h2>task 1</h2>
+            <p>description of the task 1</p>
+            <button>delete</button>
+          </div>
+        </div>
+        <!-- progress -->
+        <div id="progress" class="task-column">
+          <div class="heading">
+            <div class="left">in progress</div>
+            <div class="right">count</div>
+          </div>
+        </div>
+        <!-- done -->
+        <div id="done" class="task-column">
+          <div class="heading">
+            <div class="left">done task</div>
+            <div class="right">count</div>
+          </div>
+        </div>
+      </section>
     </main>
     <script src="./script.js"></script>
   </body>
